@@ -1,0 +1,85 @@
+packagecom.example.addition;
+importandroid.os.Bundle;
+importandroid.app.Activity;
+importandroid.view.Menu;
+importandroid.view.View; 
+importandroid.view.View.OnClickListener; 
+importandroid.widget.Button; 
+importandroid.widget.EditText; 
+importandroid.widget.Toast;
+publicclassMainActivityextends Activity {
+
+privateEditTextedittext1,edittext2; 
+private Button Btn_Add ; 
+private Button Btn_Sub ;
+private Button Btn_Mul ;
+private Button Btn_Div ;
+@Override
+protectedvoidonCreate(Bundle savedInstanceState) {
+super.onCreate(savedInstanceState);
+setContentView(R.layout.activity_main);
+addListenerOnButton(); 
+}
+publicvoidaddListenerOnButton(){ 
+edittext1=(EditText)findViewById(R.id.editText1); 
+edittext2=(EditText)findViewById(R.id.editText2); 
+Btn_Add=(Button)findViewById(R.id.button1);
+Btn_Sub=(Button)findViewById(R.id.button2);
+Btn_Mul=(Button)findViewById(R.id.button3); 
+Btn_Div=(Button)findViewById(R.id.button4); 
+Btn_Add.setOnClickListener(newOnClickListener(){ 
+@Override
+publicvoidonClick(View view) { 
+ String value1=edittext1.getText().toString(); 
+ String value2=edittext2.getText().toString(); 
+int a=Integer.parseInt(value1); 
+int b=Integer.parseInt(value2); 
+int sum=a+b; 
+Toast.makeText(getApplicationContext(),String.valueOf(sum),Toast.LENGTH_LONG
+).show(); 
+ } 
+ });
+Btn_Sub.setOnClickListener(newOnClickListener(){ 
+@Override
+publicvoidonClick(View view) { 
+ String value1=edittext1.getText().toString(); 
+ String value2=edittext2.getText().toString(); 
+int a=Integer.parseInt(value1); 
+int b=Integer.parseInt(value2); 
+int sub=a-b; 
+Toast.makeText(getApplicationContext(),String.valueOf(sub),Toast.LENGTH_LONG
+).show(); 
+ } 
+ }); 
+Btn_Mul.setOnClickListener(newOnClickListener(){ 
+@Override
+publicvoidonClick(View view) { 
+ String value1=edittext1.getText().toString(); 
+ String value2=edittext2.getText().toString(); 
+int a=Integer.parseInt(value1); 
+int b=Integer.parseInt(value2); 
+int m=a*b; 
+Toast.makeText(getApplicationContext(),String.valueOf(m),Toast.LENGTH_LONG).
+show(); 
+ } 
+ });
+Btn_Div.setOnClickListener(newOnClickListener(){ 
+@Override
+publicvoidonClick(View view) { 
+ String value1=edittext1.getText().toString(); 
+ String value2=edittext2.getText().toString(); 
+int a=Integer.parseInt(value1); 
+int b=Integer.parseInt(value2); 
+int n=a/b; 
+Toast.makeText(getApplicationContext(),String.valueOf(n),Toast.LENGTH_LONG).s
+how(); 
+ } 
+ }); 
+ }
+@Override
+publicbooleanonCreateOptionsMenu(Menu menu) {
+// Inflate the menu; this adds items to the action bar if it is present.
+getMenuInflater().inflate(R.menu.main, menu);
+returntrue;
+}
+}
