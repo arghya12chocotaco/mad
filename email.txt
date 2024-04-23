@@ -1,0 +1,139 @@
+package com.example.email;
+
+
+
+import android.os.Bundle;
+import android.view.View;
+import android.widget.Button;
+import android.widget.EditText;
+import android.app.Activity;
+import android.content.Intent;
+
+public class MainActivity extends Activity {
+
+	EditText txtTo, txtSub, txtMsg;
+	Button b;
+	String strTo, strSub, strMsg;
+	Intent in;
+	
+@Override
+protected void onCreate(Bundle savedInstanceState) {
+super.onCreate(savedInstanceState);
+setContentView(R.layout.activity_main);
+
+txtTo=(EditText)findViewById(R.id.editText1);
+txtSub=(EditText)findViewById(R.id.editText2);
+txtMsg=(EditText)findViewById(R.id.editText3);
+
+b=(Button)findViewById(R.id.button1);
+
+b.setOnClickListener(new View.OnClickListener() {
+			
+			@Override
+			public void onClick(View arg0) {
+				// TODO Auto-generated method stub
+				
+				strTo=txtTo.getText().toString();
+				strSub=txtSub.getText().toString();
+				strMsg=txtMsg.getText().toString();
+				
+				in=new Intent(Intent.ACTION_SEND);
+				
+				//in.putExtra(Intent.EXTRA_EMAIL, new String[]{strTo});
+				in.putExtra(Intent.EXTRA_EMAIL, strTo);
+				in.putExtra(Intent.EXTRA_SUBJECT, strSub);
+				in.putExtra(Intent.EXTRA_TEXT, strMsg);
+				
+				in.setType("message/rfc822");
+				
+				startActivity(Intent.createChooser(in, "Choose an email client..."));
+					
+			}
+		});
+
+    }
+
+
+}
+
+
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:paddingBottom="@dimen/activity_vertical_margin"
+    android:paddingLeft="@dimen/activity_horizontal_margin"
+    android:paddingRight="@dimen/activity_horizontal_margin"
+    android:paddingTop="@dimen/activity_vertical_margin"
+    tools:context=".MainActivity" >
+
+    <Button
+        android:id="@+id/button1"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
+        android:layout_marginBottom="130dp"
+        android:layout_marginLeft="46dp"
+        android:text="Send Email" />
+
+    <EditText
+        android:id="@+id/editText1"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="14dp"
+        android:ems="10"
+        android:text="Receipient Adress" >
+
+        <requestFocus />
+    </EditText>
+
+    <EditText
+        android:id="@+id/editText3"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignRight="@+id/editText2"
+        android:layout_below="@+id/editText2"
+        android:layout_marginTop="34dp"
+        android:ems="10"
+        android:text="Message" />
+
+    <EditText
+        android:id="@+id/editText2"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/editText1"
+        android:layout_marginTop="36dp"
+        android:ems="10"
+        android:text="Subject" />
+
+</RelativeLayout>
+
+
+<?xml version="1.0" encoding="utf-8"?>
+<manifest xmlns:android="http://schemas.android.com/apk/res/android"
+    package="com.example.email"
+    android:versionCode="1"
+    android:versionName="1.0" >
+
+    <uses-sdk
+        android:minSdkVersion="8"
+        android:targetSdkVersion="17" />
+
+    <application
+        android:allowBackup="true"
+        android:icon="@drawable/ic_launcher"
+        android:label="@string/app_name"
+        android:theme="@style/AppTheme" >
+        <activity
+            android:name="com.example.email.MainActivity"
+            android:label="@string/app_name" >
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
+        </activity>
+    </application>
+    <uses-permission android:name="android.permission.INTERNET"/>
+
+</manifest>
